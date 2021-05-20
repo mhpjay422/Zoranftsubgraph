@@ -1,6 +1,6 @@
 specVersion: 0.0.2
 schema:
-  file: ./schema.graphql
+  file: schema.graphql
 dataSources:
   - kind: ethereum/contract
     name: Token
@@ -14,14 +14,19 @@ dataSources:
       apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
+        - Approval
+        - ApprovalForAll
+        - TokenMetadataURIUpdated
+        - TokenURIUpdated
+        - Transfer
         - Token
         - User
       abis:
         - name: Token
-          file: ./abis/Token.json
+          file: Token/abis/Token.json
       eventHandlers:
         - event: TokenURIUpdated(indexed uint256,address,string)
           handler: handleTokenURIUpdated
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
-      file: ./src/mapping.ts
+      file: Token/Token.wasm
